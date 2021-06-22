@@ -72,6 +72,7 @@ function giveRating(e) {
     })
     .then(resp => resp.json())
     .then(data => renderRatedJokes(data))
+    
     switch(e.target.id) {
         case '1':
         alert(`You gave this Dad Joke a rating of 1 dad shoe. 
@@ -136,8 +137,6 @@ function renderRatedJokes(joke) {
         }
     }
 }
-
-
 
 document.querySelectorAll('.wordart')[0].addEventListener('click', () => {
     body.innerHTML = `<img width=100% height=100% src='images/dad-joke-bkgrnd.jpeg'><h1>Ope! Looks like you broke the website</h1>`
