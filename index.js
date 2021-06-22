@@ -1,6 +1,8 @@
 let dadShoes = document.querySelectorAll('.dad-shoe')
 const dadJokes = document.getElementById('rendered-joke')
 const favoriteJokes = document.getElementById('favorite-jokes')
+const filterButtons = document.querySelectorAll('.joke-filter')
+const ratedJokeSection = document.getElementById('rated-jokes')
 let favButton = document.createElement('button')
 let nextJokeButton = document.createElement('button')
 
@@ -93,3 +95,44 @@ function giveRating(e) {
     dadJokes.querySelector('.joke-card').remove()
     getDadJoke()
 }
+
+function getRatedJokes() {
+    fetch('http://localhost:3000/ratedJokes')
+    .then(resp => resp.json())
+    .then(data => data.forEach(joke => renderRatedJokes(joke)))
+}
+
+getRatedJokes()
+
+function renderRatedJokes(joke) {
+    let ratedJokeCard = document.createElement('div')
+    ratedJokeCard.setAttribute('class', 'joke-card')
+    ratedJokeCard.style.display = 'none'
+    let ratedJokeSetup = document.createElement('p')
+    ratedJokeSetup.textContent = joke.setup
+    let ratedJokePunchline = document.createElement('p')
+    ratedJokePunchline.textContent = joke.punchline
+    ratedJokePunchline.style.fontWeight = 'bold'
+    ratedJokeSection.append(ratedJokeCard)
+    ratedJokeCard.append(ratedJokeSetup)
+    ratedJokeCard.append(ratedJokePunchline)
+
+    filterButtons.forEach(button => button.addEventListener('change', showFilteredJokes))
+
+    function showFilteredJokes(e) {
+        if (joke.rating === parseInt(e.target.value)) {
+            ratedJokeCard.style.display = 'block'
+        } else {
+            ratedJokeCard.style.display = 'none'
+        }
+    }
+}
+
+
+
+
+
+
+    
+    
+
