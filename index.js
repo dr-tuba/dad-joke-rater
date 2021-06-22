@@ -139,7 +139,7 @@ function renderRatedJokes(joke) {
 }
 
 document.querySelectorAll('.wordart')[0].addEventListener('click', () => {
-    body.innerHTML = `<img width=100% height=100% src='images/dad-joke-bkgrnd.jpeg'><h1>Ope! Looks like you broke the website</h1>`
+    body.innerHTML = `<img width=100% height=100% src='images/dad-joke-bkgrnd.jpeg'><h1>Ope! Looks like you broke the website.</h1><p>That'll teach you to NOT TOUCH THE THERMOSTAT</p>`
 })
 
 
