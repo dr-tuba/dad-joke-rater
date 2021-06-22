@@ -51,27 +51,46 @@ favButton.addEventListener('click', (e) => {
 })
 
 dadShoes.forEach(shoe => shoe.addEventListener('click', giveRating))
+
 function giveRating(e) {
-    switch(e.target.id) {
-        case '1':
-        alert(`You gave this Dad Joke a rating of 1 dad shoe. 
-                "Dad...just...no....please stop"`); 
-        break;
-        case '2':
-        alert(`You gave this Dad Joke a rating of 2 dad shoes.
-                "Keep trying Dad"`);
-        break;
-        case '3':
-        alert(`You gave this Dad Joke a rating of 3 dad shoes. 
-                "lol, ugh you're so stupid."`);
-        break; 
-        case '4':
-        alert(`You gave this Dad Joke a rating of 4 dad shoes. 
-                "Alright Dad, that one was pretty good"`);
-        break; 
-        case '5':
-        alert(`You gave this Dad Joke a rating of 5 dad shoes. 
-                "Damn Dad, even Mom laughed at that one!"`);
-        break;     
-    }
+    fetch('http://localhost:3000/ratedJokes/', {
+        method: 'POST',
+        headers: {
+            'Content-Type' : 'application/json',
+        },
+        body: JSON.stringify({
+            setup: dadJokes.querySelector('.joke-card').querySelector('h1').textContent,
+            punchline: dadJokes.querySelector('.joke-card').querySelectorAll('h1')[1].textContent,
+            rating: parseInt(e.target.id),
+            type: 'general'
+        }),
+    })
+    dadJokes.querySelector('.joke-card').remove()
+    getDadJoke()
 }
+
+
+// function giveRating(e) {
+//     switch(e.target.id) {
+//         case '1':
+//         alert(`You gave this Dad Joke a rating of 1 dad shoe. 
+//                 "Dad...just...no....please stop"`); 
+//         break;
+//         case '2':
+//         alert(`You gave this Dad Joke a rating of 2 dad shoes.
+//                 "Keep trying Dad"`);
+//         break;
+//         case '3':
+//         alert(`You gave this Dad Joke a rating of 3 dad shoes. 
+//                 "lol, ugh you're so stupid."`);
+//         break; 
+//         case '4':
+//         alert(`You gave this Dad Joke a rating of 4 dad shoes. 
+//                 "Alright Dad, that one was pretty good"`);
+//         break; 
+//         case '5':
+//         alert(`You gave this Dad Joke a rating of 5 dad shoes. 
+//                 "Damn Dad, even Mom laughed at that one!"`);
+//         break;     
+//     }
+// }

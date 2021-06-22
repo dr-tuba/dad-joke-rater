@@ -1,8 +1,18 @@
 {
-    "ratedJokes" : {
-        "type" : "general",
-        "id" : "87",
-        "setup" : "Did you hear about the chameleon who couldn't change color?",
-        "punchline" : "They had a reptile dysfunction."
-        }            
+  "ratedJokes": [
+    {
+      "id": 1,
+      "setup": "Why didn’t the skeleton cross the road?",
+      "punchline": "Because he had no guts.",
+      "rating": 5,
+      "type": "general"
+    },
+    {
+      "setup": "How come a man driving a train got struck by lightning?",
+      "punchline": "He was a good conductor.",
+      "rating": 4,
+      "type": "general",
+      "id": 2
+    }
+  ]
 }
