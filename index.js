@@ -36,9 +36,9 @@ function renderJoke(data) {
 }
 
 nextJokeButton.addEventListener('click', (e) => {
-    console.log(e)
-    e.target.parentNode.remove()
+    console.log(e.target.parentNode)
     getDadJoke()
+    e.target.parentNode.remove()
 })
 
 let favJokeCard = document.createElement('div')
