@@ -105,6 +105,7 @@ p {
       transform: translateY(0);
     }
 }
+
 @keyframes wobble-vertical-on-hover {
     16.65% {
       -webkit-transform: translateY(8px);
