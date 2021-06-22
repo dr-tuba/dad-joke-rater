@@ -31,7 +31,8 @@ function renderJoke(data) {
 }
 
 nextJokeButton.addEventListener('click', (e) => {
-    e.path[1].remove()
+    console.log(e)
+    e.target.parentNode.remove()
     getDadJoke()
 })
 
