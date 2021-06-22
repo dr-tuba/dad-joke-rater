@@ -2,7 +2,7 @@ html {
     margin: 0;
     background: rgb(0,0,170);
     background: linear-gradient(90deg, rgba(0,0,170,1) 0%, rgba(36,192,253,1) 100%);
-    font-family: monospace;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
 }
 
 .wordart {
@@ -44,6 +44,10 @@ h1 {
     margin: 2em;
     padding: 2em;
     background-color: white;
+}
+
+#rating {
+    /* background-color: white; */
 }
 
 .row {

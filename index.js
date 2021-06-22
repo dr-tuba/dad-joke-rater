@@ -1,3 +1,4 @@
+let body = document.querySelector('body')
 let dadShoes = document.querySelectorAll('.dad-shoe')
 const dadJokes = document.getElementById('rendered-joke')
 const favoriteJokes = document.getElementById('favorite-jokes')
@@ -40,19 +41,18 @@ nextJokeButton.addEventListener('click', (e) => {
     getDadJoke()
 })
 
+let favJokeCard = document.createElement('div')
+let favJokeSetup = document.createElement('p')
+let favJokePunchline = document.createElement('p')
+
 favButton.addEventListener('click', (e) => {
-    let favJokeCard = document.createElement('div')
     favJokeCard.setAttribute('class', 'joke-card')
-    let favJokeSetup = document.createElement('p')
     favJokeSetup.textContent = e.target.parentNode.firstChild.textContent
-    let favJokePunchline = document.createElement('p')
     favJokePunchline.textContent = e.target.previousSibling.textContent
     favJokePunchline.style.fontWeight = 'bold'
     favoriteJokes.append(favJokeCard)
     favJokeCard.append(favJokeSetup)
     favJokeCard.append(favJokePunchline)
-    e.target.parentNode.remove()
-    getDadJoke()
 })
 
 dadShoes.forEach(shoe => shoe.addEventListener('click', giveRating))
@@ -70,6 +70,8 @@ function giveRating(e) {
             type: 'general'
         }),
     })
+    .then(resp => resp.json())
+    .then(data => renderRatedJokes(data))
     switch(e.target.id) {
         case '1':
         alert(`You gave this Dad Joke a rating of 1 dad shoe. 
@@ -104,15 +106,20 @@ function getRatedJokes() {
 
 getRatedJokes()
 
+let ratedJokeHeading = document.createElement('h1')
+ratedJokeSection.append(ratedJokeHeading)
+
 function renderRatedJokes(joke) {
     let ratedJokeCard = document.createElement('div')
+    let ratedJokeSetup = document.createElement('p')
+    let ratedJokePunchline = document.createElement('p')
+   
     ratedJokeCard.setAttribute('class', 'joke-card')
     ratedJokeCard.style.display = 'none'
-    let ratedJokeSetup = document.createElement('p')
     ratedJokeSetup.textContent = joke.setup
-    let ratedJokePunchline = document.createElement('p')
     ratedJokePunchline.textContent = joke.punchline
     ratedJokePunchline.style.fontWeight = 'bold'
+    
     ratedJokeSection.append(ratedJokeCard)
     ratedJokeCard.append(ratedJokeSetup)
     ratedJokeCard.append(ratedJokePunchline)
@@ -121,12 +128,23 @@ function renderRatedJokes(joke) {
 
     function showFilteredJokes(e) {
         if (joke.rating === parseInt(e.target.value)) {
+            ratedJokeHeading.textContent = `Jokes awarded with ${e.target.nextSibling.nodeValue}`
             ratedJokeCard.style.display = 'block'
         } else {
+            ratedJokeHeading.textContent = `Jokes awarded with ${e.target.nextSibling.nodeValue}`
             ratedJokeCard.style.display = 'none'
         }
     }
 }
+
+
+
+document.querySelectorAll('.wordart')[0].addEventListener('click', () => {
+    body.innerHTML = `<img width=100% height=100% src='images/dad-joke-bkgrnd.jpeg'><h1>Ope! Looks like you broke the website</h1>`
+})
+
+
+
 
 // Will this work to refactor my render functions???
 // function renderJokes(prefix) {
