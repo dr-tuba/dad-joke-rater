@@ -89,7 +89,7 @@ function giveRating(e) {
         break; 
         case '5':
         alert(`You gave this Dad Joke a rating of 5 dad shoes. 
-                "Damn Dad, even Mom laughed at that one!"`);
+                "Damn Dad! Mom even laughed at that one!"`);
         break;     
     }
     dadJokes.querySelector('.joke-card').remove()
@@ -127,6 +127,12 @@ function renderRatedJokes(joke) {
         }
     }
 }
+
+// Will this work to refactor my render functions???
+// function renderJokes(prefix) {
+//     let `${prefix}JokeCard` = document.createElement('div')
+//     `${prefix}JokeCard.setAttribute('class', 'joke-card')``
+// }
 
 
 
