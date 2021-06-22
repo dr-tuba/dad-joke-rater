@@ -37,7 +37,6 @@ h1 {
 
 .dad-joke-container {
     display: block;
-    margin: 0em 4em 1em 4em;
 }
 
 .joke-card {
@@ -67,8 +66,8 @@ h1 {
     display: block;
     margin: auto;
     padding: none;
-    height: 12em;
-    width: 12em;
+    height: 10em;
+    width: 10em;
 }
 
 @-webkit-keyframes wobble-vertical-on-hover {
@@ -147,6 +146,10 @@ h1 {
 }
 
 #new-joke-form {
+    text-align: center;
+}
+
+#filter-container {
     text-align: center;
 }
 

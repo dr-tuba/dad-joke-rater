@@ -23,9 +23,11 @@ function renderJoke(data) {
     jokeCard.append(jokeSetup)
     jokeCard.append(jokePunchline)
     favButton
-    favButton.textContent = "Favorite this Joke"
+    favButton.textContent = "Favorite"
+    favButton.setAttribute('class', 'button-class')
     nextJokeButton
-    nextJokeButton.textContent = "Next Dad Joke"
+    nextJokeButton.textContent = "Next"
+    nextJokeButton.setAttribute('class', 'button-class')
     jokeCard.append(favButton)
     jokeCard.append(nextJokeButton)
 }
@@ -39,10 +41,11 @@ nextJokeButton.addEventListener('click', (e) => {
 favButton.addEventListener('click', (e) => {
     let favJokeCard = document.createElement('div')
     favJokeCard.setAttribute('class', 'joke-card')
-    let favJokeSetup = document.createElement('h1')
+    let favJokeSetup = document.createElement('p')
     favJokeSetup.textContent = e.target.parentNode.firstChild.textContent
-    let favJokePunchline = document.createElement('h1')
+    let favJokePunchline = document.createElement('p')
     favJokePunchline.textContent = e.target.previousSibling.textContent
+    favJokePunchline.style.fontWeight = 'bold'
     favoriteJokes.append(favJokeCard)
     favJokeCard.append(favJokeSetup)
     favJokeCard.append(favJokePunchline)
@@ -65,32 +68,28 @@ function giveRating(e) {
             type: 'general'
         }),
     })
+    switch(e.target.id) {
+        case '1':
+        alert(`You gave this Dad Joke a rating of 1 dad shoe. 
+                "Dad...just...no....please stop"`); 
+        break;
+        case '2':
+        alert(`You gave this Dad Joke a rating of 2 dad shoes.
+                "Keep trying Dad"`);
+        break;
+        case '3':
+        alert(`You gave this Dad Joke a rating of 3 dad shoes. 
+                "lol, ugh you're so stupid."`);
+        break; 
+        case '4':
+        alert(`You gave this Dad Joke a rating of 4 dad shoes. 
+                "Alright Dad, that one was pretty good"`);
+        break; 
+        case '5':
+        alert(`You gave this Dad Joke a rating of 5 dad shoes. 
+                "Damn Dad, even Mom laughed at that one!"`);
+        break;     
+    }
     dadJokes.querySelector('.joke-card').remove()
     getDadJoke()
 }
-
-
-// function giveRating(e) {
-//     switch(e.target.id) {
-//         case '1':
-//         alert(`You gave this Dad Joke a rating of 1 dad shoe. 
-//                 "Dad...just...no....please stop"`); 
-//         break;
-//         case '2':
-//         alert(`You gave this Dad Joke a rating of 2 dad shoes.
-//                 "Keep trying Dad"`);
-//         break;
-//         case '3':
-//         alert(`You gave this Dad Joke a rating of 3 dad shoes. 
-//                 "lol, ugh you're so stupid."`);
-//         break; 
-//         case '4':
-//         alert(`You gave this Dad Joke a rating of 4 dad shoes. 
-//                 "Alright Dad, that one was pretty good"`);
-//         break; 
-//         case '5':
-//         alert(`You gave this Dad Joke a rating of 5 dad shoes. 
-//                 "Damn Dad, even Mom laughed at that one!"`);
-//         break;     
-//     }
-// }

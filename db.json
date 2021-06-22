@@ -13,6 +13,20 @@
       "rating": 4,
       "type": "general",
       "id": 2
+    },
+    {
+      "setup": "Why did the worker get fired from the orange juice factory?",
+      "punchline": "Lack of concentration.",
+      "rating": 4,
+      "type": "general",
+      "id": 3
+    },
+    {
+      "setup": "Why does Waldo only wear stripes?",
+      "punchline": "Because he doesn't want to be spotted.",
+      "rating": 5,
+      "type": "general",
+      "id": 4
     }
   ]
 }
