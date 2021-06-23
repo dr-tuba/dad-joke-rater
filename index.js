@@ -4,6 +4,7 @@ const dadJokes = document.getElementById('rendered-joke')
 const favoriteJokes = document.getElementById('favorite-jokes')
 const filterButtons = document.querySelectorAll('.joke-filter')
 const ratedJokeSection = document.getElementById('rated-jokes')
+const newJokeForm = document.getElementById('new-joke-form')
 let favButton = document.createElement('button')
 let nextJokeButton = document.createElement('button')
 
@@ -18,19 +19,24 @@ function getDadJoke() {
 function renderJoke(data) {
     let jokeCard = document.createElement('div')
     jokeCard.setAttribute('class', 'joke-card')
+    
     let jokeSetup = document.createElement('h1')
-    let jokePunchline = document.createElement('h1')
     jokeSetup.textContent = data.setup
+
+    let jokePunchline = document.createElement('h1')
     jokePunchline.textContent = data.punchline
-    dadJokes.append(jokeCard)
-    jokeCard.append(jokeSetup)
-    jokeCard.append(jokePunchline)
+   
     favButton
     favButton.textContent = "Favorite"
     favButton.setAttribute('class', 'button-class')
+    
     nextJokeButton
     nextJokeButton.textContent = "Next"
     nextJokeButton.setAttribute('class', 'button-class')
+
+    dadJokes.append(jokeCard)
+    jokeCard.append(jokeSetup)
+    jokeCard.append(jokePunchline)
     jokeCard.append(favButton)
     jokeCard.append(nextJokeButton)
 }
@@ -112,15 +118,16 @@ ratedJokeSection.append(ratedJokeHeading)
 
 function renderRatedJokes(joke) {
     let ratedJokeCard = document.createElement('div')
-    let ratedJokeSetup = document.createElement('p')
-    let ratedJokePunchline = document.createElement('p')
-   
     ratedJokeCard.setAttribute('class', 'joke-card')
     ratedJokeCard.style.display = 'none'
+    
+    let ratedJokeSetup = document.createElement('p')
     ratedJokeSetup.textContent = joke.setup
+    
+    let ratedJokePunchline = document.createElement('p')
     ratedJokePunchline.textContent = joke.punchline
     ratedJokePunchline.style.fontWeight = 'bold'
-    
+   
     ratedJokeSection.append(ratedJokeCard)
     ratedJokeCard.append(ratedJokeSetup)
     ratedJokeCard.append(ratedJokePunchline)
@@ -137,6 +144,40 @@ function renderRatedJokes(joke) {
         }
     }
 }
+
+newJokeForm.addEventListener('submit', addNewJoke)
+
+function addNewJoke(e) {
+    e.preventDefault()
+    if (inRange(e.target[2].value, 1, 5)) {
+        fetch('http://localhost:3000/ratedJokes', {
+            method: 'POST',
+            headers: {
+                'Content-Type': 'application/json',
+            },
+            body: JSON.stringify({
+                setup: e.target[0].value,
+                punchline: e.target[1].value,
+                rating: parseInt(e.target[2].value)
+            })
+        })
+        .then(() => {
+            e.target[0].value = ''
+            e.target[1].value = ''
+            e.target[2].value = ''
+            alert(`You're submission was successful!`)
+        })
+    } else {
+        alert('Please enter a single number between 1 & 5 for your rating')
+    }
+
+}
+
+function inRange(x, min, max) {
+    return ((x-min)*(x-max) <= 0)
+}
+
+
 
 document.querySelectorAll('.wordart')[0].addEventListener('click', () => {
     body.innerHTML = `<img width=100% height=100% src='images/dad-joke-bkgrnd.jpeg'><h1>Ope! Looks like you broke the website.</h1><p>That'll teach you to NOT TOUCH THE THERMOSTAT</p>`
