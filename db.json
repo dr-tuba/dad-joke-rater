@@ -41,6 +41,41 @@
       "rating": 4,
       "type": "general",
       "id": 6
+    },
+    {
+      "setup": "What cheese can never be yours?",
+      "punchline": "Nacho cheese.",
+      "rating": 5,
+      "type": "general",
+      "id": 7
+    },
+    {
+      "setup": "What's red and bad for your teeth?",
+      "punchline": "A Brick.",
+      "rating": 2,
+      "type": "general",
+      "id": 8
+    },
+    {
+      "setup": "How do the trees get on the internet?",
+      "punchline": "They log on.",
+      "rating": 4,
+      "type": "general",
+      "id": 9
+    },
+    {
+      "setup": "What did the judge say to the dentist?",
+      "punchline": "Do you swear to pull the tooth, the whole tooth and nothing but the tooth?",
+      "rating": 3,
+      "type": "general",
+      "id": 10
+    },
+    {
+      "setup": "What do you call a pile of cats?",
+      "punchline": " A Meowtain.",
+      "rating": 1,
+      "type": "general",
+      "id": 11
     }
   ]
 }

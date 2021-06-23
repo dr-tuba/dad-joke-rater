@@ -72,14 +72,13 @@ function giveRating(e) {
         body: JSON.stringify({
             setup: dadJokes.querySelector('.joke-card').querySelector('h1').textContent,
             punchline: dadJokes.querySelector('.joke-card').querySelectorAll('h1')[1].textContent,
-            rating: parseInt(e.target.id),
+            rating: parseInt(e.target.nextElementSibling.textContent),
             type: 'general'
         }),
     })
     .then(resp => resp.json())
     .then(data => renderRatedJokes(data))
-    
-    switch(e.target.id) {
+    switch(e.target.nextElementSibling.textContent) {
         case '1':
         alert(`You gave this Dad Joke a rating of 1 dad shoe. 
                 "Dad...just...no....please stop"`); 
@@ -170,14 +169,11 @@ function addNewJoke(e) {
     } else {
         alert('Please enter a single number between 1 & 5 for your rating')
     }
-
 }
 
 function inRange(x, min, max) {
     return ((x-min)*(x-max) <= 0)
 }
-
-
 
 document.querySelectorAll('.wordart')[0].addEventListener('click', () => {
     body.innerHTML = `<img width=100% height=100% src='images/dad-joke-bkgrnd.jpeg'><h1>Ope! Looks like you broke the website.</h1><p>That'll teach you to NOT TOUCH THE THERMOSTAT</p>`
