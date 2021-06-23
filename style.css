@@ -50,10 +50,6 @@ p {
     background-color: white;
 }
 
-#rating {
-    /* background-color: white; */
-}
-
 .row {
     display: flex;
     flex-direction: row;
@@ -166,6 +162,10 @@ p {
 
 #favorite-jokes {
     margin-top: 0px;
+}
+
+#favorite-jokes .joke-card {
+  margin: 0px;
 }
 
 footer {

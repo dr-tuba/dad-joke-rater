@@ -42,7 +42,6 @@ function renderJoke(data) {
 }
 
 nextJokeButton.addEventListener('click', (e) => {
-    console.log(e.target.parentNode)
     getDadJoke()
     e.target.parentNode.remove()
 })
