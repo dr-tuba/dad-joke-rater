@@ -177,30 +177,29 @@ function renderRatedJokes(joke) {
     }
 }
 
-setTimeout(() => {
-    renderRerate()
-    function renderRerate() {
-        let rerateButtons = document.querySelectorAll('.rerate-button')
+function renderRerate() {
+    let rerateButtons = document.querySelectorAll('.rerate-button')
 
-        rerateButtons.forEach(button => button.addEventListener('click', (event) => {
-            fetch(`http://localhost:3000/ratedJokes/${event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id}`, {
-                method: 'PATCH',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify({
-                    rating: parseInt(event.target.nextElementSibling.textContent)
-                })
+    rerateButtons.forEach(button => button.addEventListener('click', (event) => {
+        fetch(`http://localhost:3000/ratedJokes/${event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                rating: parseInt(event.target.nextElementSibling.textContent)
             })
-            .then(resp => resp.json())
-            .then(data => {
-                event.target.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
-                renderRatedJokes(data)
-                renderRerate()
-            })
-        }))
-    }
-}, 1000)
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            event.target.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
+            renderRatedJokes(data)
+            renderRerate()
+        })
+    }))
+}
+
+setTimeout(renderRerate, 1000)
 
 newJokeForm.addEventListener('submit', addNewJoke)
 
@@ -218,12 +217,18 @@ function addNewJoke(e) {
                 rating: parseInt(e.target[2].value)
             })
         })
+        .then(resp => resp.json())
+        .then(data => {
+            renderRatedJokes(data)
+            renderRerate()
+        })
         .then(() => {
             e.target[0].value = ''
             e.target[1].value = ''
             e.target[2].value = ''
             alert(`You're submission was successful!`)
         })
+        
     } else {
         alert('Please enter a single number between 1 & 5 for your rating')
     }

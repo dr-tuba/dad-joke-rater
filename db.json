@@ -41,6 +41,36 @@
       "rating": 3,
       "type": "general",
       "id": 6
+    },
+    {
+      "setup": "what do you call a 3 hump camel?",
+      "punchline": "pregnant!",
+      "rating": 4,
+      "id": 7
+    },
+    {
+      "setup": "what did Jay-z call his wife before they were married?",
+      "punchline": "Feyonce",
+      "rating": 2,
+      "id": 8
+    },
+    {
+      "setup": "poop",
+      "punchline": "poop2",
+      "rating": 4,
+      "id": 9
+    },
+    {
+      "setup": "poop1",
+      "punchline": "poop3",
+      "rating": 4,
+      "id": 10
+    },
+    {
+      "setup": "joe joe",
+      "punchline": "stev stev",
+      "rating": 1,
+      "id": 11
     }
   ]
 }
