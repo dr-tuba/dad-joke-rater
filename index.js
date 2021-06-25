@@ -117,6 +117,7 @@ ratedJokeSection.append(ratedJokeHeading)
 function renderRatedJokes(joke) {
     let ratedJokeCard = document.createElement('div')
     ratedJokeCard.setAttribute('class', 'joke-card')
+    ratedJokeCard.setAttribute('id', joke.id)
     ratedJokeCard.style.display = 'none'
     
     let ratedJokeSetup = document.createElement('p')
@@ -125,10 +126,41 @@ function renderRatedJokes(joke) {
     let ratedJokePunchline = document.createElement('p')
     ratedJokePunchline.textContent = joke.punchline
     ratedJokePunchline.style.fontWeight = 'bold'
-   
+
+    let dadShoeContainer = document.createElement('div')
+    dadShoeContainer.setAttribute('class', 'row')
+    dadShoeContainer.setAttribute('id', 'rerate-container')
+
+    let eachDadShoe = document.createElement('div')
+    eachDadShoe.setAttribute('class', 'column, rerate-dad-shoe')
+    eachDadShoe.innerHTML = `<div class='row'>
+        <div class='column'>
+            <img class='dad-shoe wobble-vertical-on-hover rerate-button' src='images/new-balance-shoe.png'>
+            <h2>1</h2>
+        </div>
+        <div class='column'>
+            <img class='dad-shoe wobble-vertical-on-hover rerate-button' src='images/new-balance-shoe.png'>
+            <h2>2</h2>
+        </div>
+        <div class='column'>
+            <img class='dad-shoe wobble-vertical-on-hover rerate-button' src='images/new-balance-shoe.png'>
+            <h2>3</h2>  
+        </div>
+        <div class='column'>
+            <img class='dad-shoe wobble-vertical-on-hover rerate-button' src='images/new-balance-shoe.png'>
+            <h2>4</h2>
+        </div>
+        <div class='column'>
+            <img class='dad-shoe wobble-vertical-on-hover rerate-button' src='images/new-balance-shoe.png'>
+            <h2>5</h2>
+        </div>
+    </div>`
+
     ratedJokeSection.append(ratedJokeCard)
     ratedJokeCard.append(ratedJokeSetup)
     ratedJokeCard.append(ratedJokePunchline)
+    ratedJokeCard.append(dadShoeContainer)
+    dadShoeContainer.append(eachDadShoe)
 
     filterButtons.forEach(button => button.addEventListener('change', showFilteredJokes))
 
@@ -142,6 +174,29 @@ function renderRatedJokes(joke) {
         }
     }
 }
+
+setTimeout(() => {
+    let rerateButtons = document.querySelectorAll('.rerate-button')
+
+    rerateButtons.forEach(button => button.addEventListener('click', (event) => {
+        console.log(event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id)
+        console.log(event.target.nextElementSibling.textContent)
+        fetch(`http://localhost:3000/ratedJokes/${event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id}`, {
+            method: 'PATCH',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+                rating: parseInt(event.target.nextElementSibling.textContent)
+            })
+        })
+        .then(resp => resp.json())
+        .then(data => {
+            event.target.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
+            renderRatedJokes(data)
+        })
+    }))
+}, 1000)
 
 newJokeForm.addEventListener('submit', addNewJoke)
 
