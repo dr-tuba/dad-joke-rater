@@ -120,10 +120,10 @@ function renderRatedJokes(joke) {
     ratedJokeCard.setAttribute('id', joke.id)
     ratedJokeCard.style.display = 'none'
     
-    let ratedJokeSetup = document.createElement('p')
+    let ratedJokeSetup = document.createElement('h3')
     ratedJokeSetup.textContent = joke.setup
     
-    let ratedJokePunchline = document.createElement('p')
+    let ratedJokePunchline = document.createElement('h3')
     ratedJokePunchline.textContent = joke.punchline
     ratedJokePunchline.style.fontWeight = 'bold'
 
@@ -133,7 +133,9 @@ function renderRatedJokes(joke) {
 
     let eachDadShoe = document.createElement('div')
     eachDadShoe.setAttribute('class', 'column, rerate-dad-shoe')
-    eachDadShoe.innerHTML = `<div class='row'>
+    eachDadShoe.innerHTML = `
+    <p>Here you can rerate a joke!</p>
+    <div class='row'>
         <div class='column'>
             <img class='dad-shoe wobble-vertical-on-hover rerate-button' src='images/new-balance-shoe.png'>
             <h2>1</h2>
@@ -176,26 +178,28 @@ function renderRatedJokes(joke) {
 }
 
 setTimeout(() => {
-    let rerateButtons = document.querySelectorAll('.rerate-button')
+    renderRerate()
+    function renderRerate() {
+        let rerateButtons = document.querySelectorAll('.rerate-button')
 
-    rerateButtons.forEach(button => button.addEventListener('click', (event) => {
-        console.log(event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id)
-        console.log(event.target.nextElementSibling.textContent)
-        fetch(`http://localhost:3000/ratedJokes/${event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id}`, {
-            method: 'PATCH',
-            headers: {
-                'Content-Type': 'application/json'
-            },
-            body: JSON.stringify({
-                rating: parseInt(event.target.nextElementSibling.textContent)
+        rerateButtons.forEach(button => button.addEventListener('click', (event) => {
+            fetch(`http://localhost:3000/ratedJokes/${event.target.parentNode.parentNode.parentNode.parentNode.parentNode.id}`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    rating: parseInt(event.target.nextElementSibling.textContent)
+                })
             })
-        })
-        .then(resp => resp.json())
-        .then(data => {
-            event.target.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
-            renderRatedJokes(data)
-        })
-    }))
+            .then(resp => resp.json())
+            .then(data => {
+                event.target.parentNode.parentNode.parentNode.parentNode.parentNode.remove()
+                renderRatedJokes(data)
+                renderRerate()
+            })
+        }))
+    }
 }, 1000)
 
 newJokeForm.addEventListener('submit', addNewJoke)

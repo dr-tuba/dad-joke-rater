@@ -10,14 +10,14 @@
     {
       "setup": "Did you hear that the police have a warrant out on a midget psychic ripping people off?",
       "punchline": "It reads \"Small medium at large.\"",
-      "rating": 2,
+      "rating": 5,
       "type": "general",
       "id": 2
     },
     {
       "setup": "How do you steal a coat?",
       "punchline": "You jacket.",
-      "rating": 4,
+      "rating": 1,
       "type": "general",
       "id": 3
     },
@@ -38,7 +38,7 @@
     {
       "setup": "Where’s the bin?",
       "punchline": "I haven’t been anywhere!",
-      "rating": 4,
+      "rating": 3,
       "type": "general",
       "id": 6
     }
